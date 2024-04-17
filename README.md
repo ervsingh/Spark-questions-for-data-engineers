@@ -1,2 +1,2 @@
 # Spark-questions-for-data-engineers
-Coding and scenario based questions on Spark
+This repo has all the  similar questions that can be asked for a 4yrs experienced data engineer in spark.
