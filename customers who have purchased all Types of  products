@@ -1,0 +1,19 @@
+ question 1> You have two tables: "Customers" and "Purchases." 
+The "Customers" table has the following columns: CustomerID, CustomerName.
+The "Purchases" table has the following columns: PurchaseID, PurchaseDate, CustomerID, ProductID.
+Write a Pyspark Code to find the customers who have purchased all Types of  products.
+Assume you have customer_df and purchase_df as dataframes 
+customer_df,purchase_df
+
+Code: 
+customer_purchase_df=customer_df.join(purchase_df,customer_df['CustomerID']==purchase_df['CustomerID'],"inner")
+
+customer_product_count_df=customer_purchase_df.groupBy("CustomerID").agg(countDistinct("ProductID")\
+.alias("product_count"))
+
+distinct_product_count=purchase_df.select(countDistinct("ProductID")).collect[0][0]
+
+final_df=customer_product_count_df.filter(customer_product_count_df["product_count"]==distinct_product_count)
+
+resultant_df=final_df.select("CustomerID","CustomerName").collect()
+
